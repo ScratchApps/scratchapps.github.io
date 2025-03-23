@@ -13,4 +13,4 @@ jobs:
           -d '{"content": "@LCJUNIOR1220 Someone Went To https://scratchapps.github.io"}' \
           "$DISCORD_WEBHOOK"
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORDWEBHOOK }}
