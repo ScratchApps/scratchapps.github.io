@@ -1,7 +1,7 @@
 name: Send Discord Notification
 
 on:
-  workflow_dispatch: # Allows manual and API triggers
+  workflow_dispatch: # Allows API triggers from GitHub Pages
 
 jobs:
   notify:
@@ -11,6 +11,6 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" \
           -d '{"content": "@LCJUNIOR1220 Someone Went To https://scratchapps.github.io"}' \
-          "$DISCORD_WEBHOOK"
+          "$DISCORDWEBHOOK"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORDWEBHOOK }}
