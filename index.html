@@ -14,7 +14,7 @@
                     method: "POST",
                     headers: {
                         "Accept": "application/vnd.github+json",
-                        "Authorization": "Bearer {{ secrets.GITHUB_PAT }}", 
+                        "Authorization": "Bearer {{ secrets.PAT_TOKEN }}", 
                         "X-GitHub-Api-Version": "2022-11-28"
                     },
                     body: JSON.stringify({ ref: "main" }) // Triggers the workflow
