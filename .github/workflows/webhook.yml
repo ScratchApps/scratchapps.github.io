@@ -11,6 +11,6 @@ jobs:
         run: |
           curl -H "Content-Type: application/json" \
           -d '{"content": "@LCJUNIOR1220 Someone Went To https://scratchapps.github.io"}' \
-          "$DISCORDWEBHOOK"
+          "$DISCORD_WEBHOOK"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORDWEBHOOK }}
