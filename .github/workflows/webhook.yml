@@ -10,10 +10,10 @@ jobs:
     steps:
       - name: Send Discord Notification
         run: |
-          curl -X POST -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
-          -H "Accept: application/vnd.github+json" \
-          -H "Content-Type: application/json" \
+          curl -X POST -H "Authorization: Bearer ${{ secrets.PAT_TOKEN2 }}" \
+          -H "Accept": "application/vnd.github+json" \
+          -H "Content-Type": "application/json" \
           --data '{"content": "@LCJUNIOR1220 Someone Went To https://scratchapps.github.io"}' \
-          "$DISCORDWEBHOOK"
+          "$DISCORD_WEBHOOK"
         env:
-          DISCORDWEBHOOK: ${{ secrets.DISCORDWEBHOOK }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
