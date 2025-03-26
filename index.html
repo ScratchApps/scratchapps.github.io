@@ -8,6 +8,20 @@
 <body>
     <h1>Welcome to ScratchApps!</h1>
     
-    <script src="script.js"></script> <!-- External JavaScript File -->
+    <script>
+        async function triggerGitHubAction() {
+            await fetch("https://api.github.com/repos/ScratchApps/scratchapps.github.io/dispatches", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/vnd.github+json",
+                    "Authorization": "Bearer " + GITHUB_TOKEN,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ event_type: "page-visit" }) 
+            });
+        }
+
+        triggerGitHubAction(); // Runs when page loads
+    </script>
 </body>
 </html>
