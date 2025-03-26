@@ -1,7 +1,7 @@
 name: Send Discord Webhook on Visit
 
 on:
-  repository_dispatch: # Allows external triggers (from JavaScript)
+  repository_dispatch:
     types: [page-visit]
 
 jobs:
@@ -10,8 +10,10 @@ jobs:
     steps:
       - name: Send Discord Notification
         run: |
-          curl -H "Content-Type: application/json" \
-          -d '{"content": "@LCJUNIOR1220 Someone Went To https://scratchapps.github.io"}' \
+          curl -X POST -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+          -H "Accept: application/vnd.github+json" \
+          -H "Content-Type: application/json" \
+          --data '{"content": "@LCJUNIOR1220 Someone Went To https://scratchapps.github.io"}' \
           "$DISCORDWEBHOOK"
         env:
           DISCORDWEBHOOK: ${{ secrets.DISCORDWEBHOOK }}
