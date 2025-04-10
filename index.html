@@ -1,26 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visitor Logger</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ScratchApps Visitor Logger</title>
 </head>
 <body>
-    <h1>Welcome to ScratchApps!</h1>
+  <h1>Welcome to ScratchApps!</h1>
 
-    <script>
-        async function triggerGitHubAction() {
-            await fetch("https://api.github.com/repos/ScratchApps/scratchapps.github.io/dispatches", {
-                method: "POST",
-                headers: {
-                    "Accept": "application/vnd.github+json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ event_type: "page-visit" }) 
-            });
-        }
+  <script>
+    const webhookURL = secrethere;
+    const cookieName = "scratchapps_visited";
+    const siteName = "https://scratchapps.github.io";
 
-        triggerGitHubAction(); // Runs when page loads
-    </script>
+    function setPermanentCookie(name, value) {
+      const expires = new Date("2124-01-01").toUTCString(); // Permanent enough!
+      document.cookie = name + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+      return document.cookie.split("; ").find(row => row.startsWith(name + "="))?.split("=")[1];
+    }
+
+    function incrementVisitCount() {
+      let visits = localStorage.getItem("globalVisitCount");
+      visits = visits ? parseInt(visits) + 1 : 1;
+      localStorage.setItem("globalVisitCount", visits);
+      return visits;
+    }
+
+    async function sendDiscordWebhook(message) {
+      try {
+        await fetch(webhookURL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ content: message })
+        });
+      } catch (e) {
+        console.error("Failed to send webhook:", e);
+      }
+    }
+
+    (function handleVisit() {
+      const alreadyVisited = getCookie(cookieName);
+
+      if (!alreadyVisited) {
+        setPermanentCookie(cookieName, "true");
+        const visitNumber = incrementVisitCount();
+        sendDiscordWebhook(`${siteName} has ${visitNumber} visits!`);
+      } else {
+        console.log("Returning visitor - not counted again.");
+      }
+    })();
+  </script>
 </body>
 </html>
