@@ -1,0 +1,11 @@
+<script>
+  fetch("https://nodejs-serverless-function-express-pi-two-52.vercel.app/api/visit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      content: "New visitor on ScratchApps!"
+    })
+  });
+</script>
