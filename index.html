@@ -1,21 +1,33 @@
-<script>
-  fetch("https://nodejs-serverless-function-express-pi-two-52.vercel.app/api/visit", {
-    method: "POST",  // POST method to trigger the serverless function
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({})  // Send an empty object to trigger the POST request
-  })
-  .then(response => {
-    if (response.ok) {
-      console.log("Successfully triggered webhook");
-    } else {
-      console.error("Error triggering webhook");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visitor Logger</title>
+</head>
+<body>
+  <h1>Welcome to ScratchApps!</h1>
+
+  <script>
+    fetch("https://nodejs-serverless-function-express-pi-two-52.vercel.app/api/visit", {
+      method: "POST",  // POST method to trigger the serverless function
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({})  // Send an empty object to trigger the POST request
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log("Successfully triggered webhook");
+      } else {
+        console.error("Error triggering webhook");
+        document.title = "Error Triggering Webhook";  // Change the title on error
+      }
+    })
+    .catch(error => {
+      console.error("Failed to send request:", error);
       document.title = "Error Triggering Webhook";  // Change the title on error
-    }
-  })
-  .catch(error => {
-    console.error("Failed to send request:", error);
-    document.title = "Error Triggering Webhook";  // Change the title on error
-  });
-</script>
+    });
+  </script>
+</body>
+</html>
