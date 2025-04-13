@@ -6,7 +6,7 @@
   <title>Scratch Apps</title>
 </head>
 <body>
-  <h1>Welcome to ScratchApps! Our Website Is Currently Undergoing Important Maintenance</h1>
+  <h1>Welcome to ScratchApps! Our Website Is Currently Undergoing Maintenance!</h1>
 
   <script>
     fetch("https://scratchapplications.vercel.app/api/visit", {
@@ -21,12 +21,12 @@
         console.log("Successfully triggered webhook");
       } else {
         console.error("Error triggering webhook");
-        document.title = "Error Triggering Webhook";  // Change the title on error
+        document.title = "An Error Occurred!";  // Change the title on error
       }
     })
     .catch(error => {
       console.error("Failed to send request:", error);
-      document.title = "Error Triggering Webhook";  // Change the title on error
+      document.title = "An Error Occurred!";  // Change the title on error
     });
   </script>
 </body>
